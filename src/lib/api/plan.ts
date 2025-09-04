@@ -1,19 +1,18 @@
 import { ApiResPromise } from "@/types/api";
 import { GetPlanDetailProps } from "@/types/plan";
 
-const API_URL =
-  process.env.NEXT_PUBLIC_API_SERVER || "https://fesp-api.koyeb.app/market";
-const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID || "febc13-final06-emjf";
+const API_URL = process.env.NEXT_PUBLIC_API_SERVER;
+const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
 
 /**
  * 사용자가 작성한 여행 계획(type=plan) 게시물 목록을 조회
  *
  * @returns {Promise<ApiRes<GetPlanDetailProps[]>>} 여행 계획 게시물 배열을 포함한 응답 객체
  */
-export async function getPlanListUser(
-  token: string | null
-): ApiResPromise<GetPlanDetailProps[]> {
-  // console.log(token);
+export async function getPlanListUser(token: string | null): ApiResPromise<GetPlanDetailProps[]> {
+  if (!API_URL) throw new Error("API_URL이 설정되어 있지 않습니다.");
+  if (!CLIENT_ID) throw new Error("CLIENT_ID이 설정되어 있지 않습니다.");
+
   try {
     const res = await fetch(`${API_URL}/posts/users?type=plan`, {
       method: "GET",
