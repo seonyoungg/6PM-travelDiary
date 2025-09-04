@@ -1,4 +1,5 @@
-import { getApiUrl, getClientId } from "@/lib/api/apiConfig";
+import { getApiUrl } from "@/lib/api/apiConfig";
+import { getAuthHeader } from "@/lib/api/tokenConfig";
 import { ApiResPromise } from "@/types/api";
 import { GetPlanDetailProps } from "@/types/plan";
 
@@ -11,11 +12,7 @@ export async function getPlanListUser(token: string | null): ApiResPromise<GetPl
   try {
     const res = await fetch(`${getApiUrl()}/posts/users?type=plan`, {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Client-Id": getClientId(),
-        Authorization: `Bearer ${token}`,
-      },
+      headers: getAuthHeader(token),
     });
     return res.json();
   } catch (err) {
