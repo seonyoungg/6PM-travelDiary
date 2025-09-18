@@ -99,7 +99,7 @@ function IntroScreen({ onFinish }: { onFinish: () => void }) {
             className="flex justify-center mt-12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ 
+            transition={{
               delay: 0.8,
               duration: 0.4,
             }}
