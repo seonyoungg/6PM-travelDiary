@@ -42,7 +42,7 @@ function IntroScreen({ onFinish }: { onFinish: () => void }) {
   return (
     <>
       <div className="flex items-center justify-center h-screen">
-        <div className="text-center px-8">
+        <div className="text-center">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -52,7 +52,7 @@ function IntroScreen({ onFinish }: { onFinish: () => void }) {
             }}
           >
             {/* 상단 아이콘 애니메이션 */}
-            <div className="mb-4 flex items-center justify-center relative">
+            <div className="flex items-center justify-center relative">
               {icons.map((icon, i) => (
                 <motion.span
                   key={i}
@@ -74,13 +74,13 @@ function IntroScreen({ onFinish }: { onFinish: () => void }) {
             </div>
 
             {/* 중앙 로고 */}
-            <div className="flex flex-col items-center justify-center translate-y-19">
+            <div className="flex flex-col items-center justify-center gap-4 translate-y-18">
               <Image
                 src="/images/typo-loading.svg"
                 alt="여행도감"
                 width={150}
                 height={150}
-                className="object-contain w-4/5 my-4"
+                className="object-contain w-[70%]"
                 priority
               />
               <Image
@@ -88,7 +88,7 @@ function IntroScreen({ onFinish }: { onFinish: () => void }) {
                 alt="부제목"
                 width={100}
                 height={100}
-                className="object-contain w-[70%] mb-4"
+                className="object-contain w-[70%]"
                 priority
               />
             </div>
@@ -96,10 +96,10 @@ function IntroScreen({ onFinish }: { onFinish: () => void }) {
 
           {/* 로딩중 */}
           <motion.div
-            className="flex justify-center"
+            className="flex justify-center mt-12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{
+            transition={{ 
               delay: 0.8,
               duration: 0.4,
             }}
