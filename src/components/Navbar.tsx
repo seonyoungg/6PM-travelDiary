@@ -5,6 +5,11 @@ import useUserStore from "@/zustand/userStore";
 import Link from "next/link";
 import { UserRound, Home, LayoutList, SquarePen, Map } from "lucide-react";
 
+/**
+ * Navbar
+ * 로그인 필요 여부를 체크
+ * 필요하면 로그인 페이지로 리다이렉트
+ */
 interface NavItemProps {
   href: string;
   icon: React.ReactNode;
@@ -19,8 +24,7 @@ function NavLink({ href, icon, label, requireLogin }: NavItemProps) {
   const checkLogin = (e: React.MouseEvent) => {
     if (!isLoggedIn && requireLogin) {
       e.preventDefault();
-      const params = new URLSearchParams({ redirect: href });
-      router.push(`/login?${params.toString()}`);
+      router.push(`/login?redirect=${href}`); // 로그인 후 돌아올 경로 쿼리 전달
     }
   };
 
