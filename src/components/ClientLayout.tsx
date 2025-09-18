@@ -11,6 +11,34 @@ function IntroScreen({ onFinish }: { onFinish: () => void }) {
     return () => clearTimeout(timer);
   }, [onFinish]);
 
+  // 아이콘 및 애니메이션 관련 배열 설정
+  const icons = [
+    {
+      src: "/images/airplane.svg",
+      alt: "비행기 로고",
+      initial: { x: -100, y: 150 },
+      animate: { x: 60, y: -40 },
+      width: 80,
+      height: 80,
+    },
+    {
+      src: "/images/favicon.svg",
+      alt: "여행도감 로고",
+      initial: { x: -100 },
+      animate: { x: -30 },
+      width: 100,
+      height: 100,
+    },
+    {
+      src: "/images/car.svg",
+      alt: "차 로고",
+      initial: { x: 150, y: 30 },
+      animate: { x: 40, y: 30 },
+      width: 100,
+      height: 100,
+    },
+  ];
+
   return (
     <>
       <div className="flex items-center justify-center h-screen">
@@ -23,86 +51,30 @@ function IntroScreen({ onFinish }: { onFinish: () => void }) {
               ease: "easeOut",
             }}
           >
-            <div className="mb-4">
-              <div className="flex items-center justify-center">
+            {/* 상단 아이콘 애니메이션 */}
+            <div className="mb-4 flex items-center justify-center relative">
+              {icons.map((icon, i) => (
                 <motion.span
-                  className="absolute text-2xl z-10"
-                  initial={{
-                    x: -100,
-                    y: 150,
-                  }}
-                  animate={{
-                    x: 60,
-                    y: -40,
-                  }}
-                  transition={{
-                    delay: 0,
-                    duration: 1,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <Image
-                    src="/images/airplane.svg"
-                    alt="비행기 로고"
-                    width={80}
-                    height={80}
-                    className="object-contain"
-                    priority
-                  />
-                </motion.span>
-
-                <motion.span
-                  initial={{
-                    x: -100,
-                  }}
-                  animate={{
-                    x: -30,
-                  }}
-                  transition={{
-                    delay: 0,
-                    duration: 0.7,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <Image
-                    src="/images/favicon.svg"
-                    alt="여행도감 로고"
-                    width={100}
-                    height={100}
-                    className="object-contain"
-                    priority
-                  />
-                </motion.span>
-
-                <motion.span
+                  key={i}
                   className="absolute text-2xl"
-                  initial={{
-                    x: 150,
-                    y: 30,
-                  }}
-                  animate={{
-                    x: 40,
-                    y: 30,
-                  }}
-                  transition={{
-                    delay: 0,
-                    duration: 0.7,
-                    ease: "easeInOut",
-                  }}
+                  initial={icon.initial}
+                  animate={icon.animate}
+                  transition={{ delay: 0, duration: 0.7, ease: "easeInOut" }}
                 >
                   <Image
-                    src="/images/car.svg"
-                    alt="차 로고"
-                    width={100}
-                    height={100}
+                    src={icon.src}
+                    alt={icon.alt}
+                    width={icon.width}
+                    height={icon.height}
                     className="object-contain"
                     priority
                   />
                 </motion.span>
-              </div>
+              ))}
             </div>
 
-            <div className="flex flex-col items-center justify-center">
+            {/* 중앙 로고 */}
+            <div className="flex flex-col items-center justify-center translate-y-19">
               <Image
                 src="/images/typo-loading.svg"
                 alt="여행도감"
@@ -122,6 +94,7 @@ function IntroScreen({ onFinish }: { onFinish: () => void }) {
             </div>
           </motion.div>
 
+          {/* 로딩중 */}
           <motion.div
             className="flex justify-center"
             initial={{ opacity: 0 }}
