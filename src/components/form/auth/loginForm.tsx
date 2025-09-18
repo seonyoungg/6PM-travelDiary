@@ -1,7 +1,7 @@
 "use client";
 
 import React, { FormEvent, useActionState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Input from "@/components/ui/input";
 import Button from "@/components/ui/btn";
 import { login } from "@/data/actions/user";
@@ -12,6 +12,9 @@ export default function LoginForm() {
   const { setToken, setUserInfo } = useUserStore.getState();
   const router = useRouter();
   const [userState, formAction, isLoading] = useActionState(login, null);
+
+  const searchParams = useSearchParams();
+  const redirectURL = searchParams.get("redirect") || "/home";
 
   useEffect(() => {
     if (userState?.ok) {
@@ -28,7 +31,7 @@ export default function LoginForm() {
         extra: user.extra,
       });
       toast.success("로그인이 완료되었습니다.");
-      router.replace("/home");
+      router.replace(redirectURL);
     } else if (!userState?.errors && userState?.message) {
       toast.error(userState.message);
     }
