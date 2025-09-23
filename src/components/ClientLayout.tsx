@@ -74,7 +74,7 @@ function IntroScreen({ onFinish }: { onFinish: () => void }) {
             </div>
 
             {/* 중앙 로고 */}
-            <div className="flex flex-col items-center justify-center gap-4 translate-y-18">
+            <div className="flex flex-col items-center justify-center gap-4 translate-y-20">
               <Image
                 src="/images/typo-loading.svg"
                 alt="여행도감"
@@ -96,7 +96,7 @@ function IntroScreen({ onFinish }: { onFinish: () => void }) {
 
           {/* 로딩중 */}
           <motion.div
-            className="flex justify-center mt-12"
+            className="flex justify-center mt-14"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{
