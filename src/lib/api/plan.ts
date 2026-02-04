@@ -8,18 +8,20 @@ import { GetPlanDetailProps } from "@/types/plan";
  *
  * @returns {Promise<ApiRes<GetPlanDetailProps[]>>} 여행 계획 게시물 배열을 포함한 응답 객체
  */
-export async function getPlanListUser(token: string | null): ApiResPromise<GetPlanDetailProps[]> {
-  try {
-    const res = await fetch(`${getApiUrl()}/posts/users?type=plan`, {
-      method: "GET",
-      headers: getAuthHeader(token),
-    });
-    return res.json();
-  } catch (err) {
-    console.error("사용자 여행 계획 조회 실패:", err);
-    return {
-      ok: 0,
-      message: "사용자의 여행 계획 목록을 불러오는 데 실패했습니다.",
-    };
+export async function getPlanListUser(token: string | null): Promise<{ ok: 1; item: GetPlanDetailProps[] }> {
+  // 1. 요청을 보내고(fetch)
+  const res = await fetch(`${getApiUrl()}/posts/users?type=plan`, {
+    method: "GET",
+    headers: getAuthHeader(token),
+  });
+
+  // 2. 성공/실패의 판단
+  if (!res.ok) {
+    throw new Error("사용자 여행 계획 조회 실패");
   }
+
+  // 3. 성공한 데이터의 반환
+  return res.json();
 }
+
+// console UI 관련 메시지 결정 삭제

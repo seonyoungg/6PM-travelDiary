@@ -8,6 +8,7 @@ import { getPlanListUser } from "@/lib/api/plan";
 import { GetPlanDetailProps } from "@/types/plan";
 import { getDday } from "@/lib/getDday";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 type SortType = "latest" | "oldest";
 
@@ -105,12 +106,12 @@ export default function ReviewNew() {
   useEffect(() => {
     const fetchPlanList = async () => {
       try {
-        const res = await getPlanListUser(token);
-        if (res.ok) {
-          setPlan(res.item);
-        }
+        const res = await getPlanListUser(token); // 데이터 조회
+        setPlan(res.item); // 화면 상태 업데이트
       } catch (error) {
+        // 에러 관련 UI 설정
         console.error("여행 계획 목록을 가져오는데 실패했습니다:", error);
+        toast("여행 계획 목록을 가져오는데 실패했습니다");
       }
     };
 
